@@ -1,0 +1,6 @@
+rootProject.name = 'jars-dynamic-loader'
+include 'sdk-base-api'
+include 'sdk-demo1'
+include 'sdk-demo2'
+include 'spring-jars-import'
+

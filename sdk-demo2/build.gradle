@@ -1,0 +1,37 @@
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+group 'org.example'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    mavenCentral()
+}
+
+dependencies {
+    compile project(":sdk-base-api")
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+
+publishing {
+    publications {
+        //publishProject为自定义名称，可写多个发布任务
+        mavenJava(MavenPublication) {
+            //发布jar包
+            from components.java
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+        }
+    }
+}
